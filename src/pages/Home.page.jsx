@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 // layout
 import DefaultLayoutHOC from '../layouts/Default.Layout';
@@ -13,24 +14,33 @@ const Homepage = () => {
   const [premierMovies,setpremierMovies] = useState([]);
   const [onlineStreamEvents,setOnlineStreamEvents] = useState([]);
 
+    // get.apiName('/', async ()=>{})
+      useEffect(()=>{
+        const requestTopRatedMovies = async () => {
+          const getTopRatedMovies = await axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=5f00e0b1163cbd60a2b383f1eba1e2e4");
+          setRecommendedMovies(getTopRatedMovies.data.results);
+        };
+        requestTopRatedMovies()
+      },[]);
+
   return (
     <>
       <HeroCarosuel />
 
-      <div className='"container mx-auto px-4 md:px-12 my-8'>
-        <h1 className="text-2xl font-bold text-gray-800 sm:ml-3 ml-0 my-3">
-          the best of Entertainment
-        </h1>
-        <EntertainmentCardSlider />
-      </div>
-
       <div className="container mx-auto px-4 md:px-12 my-8">
         <PosterSlider
-          title="Recommened Movies"
+          title="Top Rated Movies"
           subtitle="List  of recommended movies"
           posters={RecommendedMovies}
           isDark={false}
         />
+      </div>
+
+      <div className='container mx-auto px-4 md:px-12 my-8'>
+        <h1 className="text-2xl font-bold text-gray-800 sm:ml-3 ml-0 my-3">
+          the best of Entertainment
+        </h1>
+        <EntertainmentCardSlider />
       </div>
 
       <div className="bg-premier-800 py-12">
@@ -51,7 +61,7 @@ const Homepage = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4md:px-12 my-8">
+      <div className="container mx-auto px-4 md:px-12 my-8">
         <PosterSlider
           title="online stream events"
           subtitle="online events streaming on book ticketing application"

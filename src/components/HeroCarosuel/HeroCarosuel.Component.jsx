@@ -78,8 +78,8 @@ const settings = {
     <>
       <div className="lg:hidden">
         <HeroSlider {...settings}>
-          {images.map((images) => {
-            <div className="w-full h-56 md:h-80 py-3">
+          {images.map((images,index) => {
+            <div className="w-full h-56 md:h-80 py-3" key={index}>
               <img
                 src={`https://image.tmdb.org/t/p/original${images.backdrop_path}`}
                 alt="hero banner"
@@ -91,8 +91,8 @@ const settings = {
       </div>
       <div className="hidden lg:block">
         <HeroSlider {...settingsLG}>
-          {images.map((image) => {
-            <div className="w-full h-96 px-2 py-3">
+          {images.map((images,index) => {
+            <div className="w-full h-96 px-2 py-3" key={index}>
               <img
                 src={`https://image.tmdb.org/t/p/original${images.backdrop_path}`}
                 alt="Hero Banner"
