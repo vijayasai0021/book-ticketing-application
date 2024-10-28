@@ -1,15 +1,19 @@
 import React from "react";
 import Slider from "react-slick";
 import Poster from "../Poster/Poster.Component";
+import { NextArrow,PrevArrow } from "../HeroCarosuel/Arrow.Component";
 
 const PosterSlider = (props) => {
   const { posters, title, subtitle, isDark } = props;
   const settings = {
     infinite: true,
+    arrows:true,
     dots:true,
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 4,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     responsive: [
       {
         breakpoint: 1024,

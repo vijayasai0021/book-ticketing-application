@@ -3,9 +3,11 @@ import Slider from 'react-slick';
 
 const EntertainmentCard = (props) => {
   return <>
-    <div>
-      <img className='w-full h-full rounded-lg' src={props.src} alt='entertainment'/>
-    </div>
+      <div className="flex flex-col items-start gap-2 px-1 md:px-3">
+        <div className="h-40 md:h-80">
+          <img className='w-full h-full rounded-lg' src={props.src} alt='entertainment'/>
+        </div>
+        </div>
   </>
 }
 
