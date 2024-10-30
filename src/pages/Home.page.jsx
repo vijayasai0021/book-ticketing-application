@@ -17,10 +17,26 @@ const Homepage = () => {
     // get.apiName('/', async ()=>{})
       useEffect(()=>{
         const requestTopRatedMovies = async () => {
-          const getTopRatedMovies = await axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=5f00e0b1163cbd60a2b383f1eba1e2e4");
+          const getTopRatedMovies = await axios.get("/movie/top_rated");
           setRecommendedMovies(getTopRatedMovies.data.results);
         };
         requestTopRatedMovies()
+      },[]);
+
+      useEffect(()=>{
+        const requestUpComingMovies = async () => {
+          const getUpComingMovies = await axios.get("/movie/upcoming");
+          setpremierMovies(getUpComingMovies.data.results);
+        };
+        requestUpComingMovies();
+      },[]);
+
+      useEffect(()=>{
+        const requestPopularMovies = async () => {
+          const getPopularMovies = await axios.get("/movie/popular");
+          setOnlineStreamEvents(getPopularMovies.data.results);
+        };
+        requestPopularMovies();
       },[]);
 
   return (
@@ -63,8 +79,8 @@ const Homepage = () => {
 
       <div className="container mx-auto px-4 md:px-12 my-8">
         <PosterSlider
-          title="online stream events"
-          subtitle="online events streaming on book ticketing application"
+          title="Popular Movies"
+          subtitle="popular movies in ticket booking application"
           posters={onlineStreamEvents}
           isDark={false}
         />
