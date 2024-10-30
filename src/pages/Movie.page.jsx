@@ -14,8 +14,8 @@ const MoviePage = () => {
   const { movie, setMovie } = useContext(MovieContext);
 
   const [cast, setCast] = useState([]);
-  const [similarMovies, setSimilarMovies] = useState([]);
-  const [recommendedMovies, setRecommendedMovies] = useState([]);
+  const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
+  const [recommendationMovies, setRecommendationMovies] = useState([]);
 
   useEffect(() => {
     const requestCast = async () => {
@@ -26,21 +26,21 @@ const MoviePage = () => {
   }, [id]);
 
   useEffect(() => {
-    const requestSimilarMovies = async () => {
-      const getSimilarMovies = await axios.get(`/movie/${id}/similar`);
-      setSimilarMovies(getSimilarMovies.data.results);
+    const requestNowPlayingMovies = async () => {
+      const getNowPlayingMovies = await axios.get(`/movie/now_playing`);
+      setNowPlayingMovies(getNowPlayingMovies.data.results);
     };
-    requestSimilarMovies();
+    requestNowPlayingMovies();
   }, [id]);
 
   useEffect(() => {
-    const requestRecommededMovies = async () => {
-      const getRecommendedMovies = await axios.get(
+    const requestRecommedationMovies = async () => {
+      const getRecommendationMovies = await axios.get(
         `/movie/${id}/recommendations`
       );
-      setRecommendedMovies(getRecommendedMovies.data.results);
+      setRecommendationMovies(getRecommendationMovies.data.results);
     };
-    requestRecommededMovies();
+    requestRecommedationMovies();
   }, [id]);
 
   useEffect(() => {
@@ -109,25 +109,26 @@ const MoviePage = () => {
           <hr />
         </div>
 
-        {/* Cast Sliders */}
+        {/* recommendations */}
         <div className="my-8">
           <PosterSlider
             config={settings}
             title="Recommended Movies"
-            posters={recommendedMovies}
+            posters={recommendationMovies}
             isDark={false}
           />
         </div>
 
-        {/* recommended movies Slider */}
         <div className="my-8">
           <hr />
         </div>
 
+          {/* now playing movies */}
+
         <PosterSlider
           config={settings}
-          title="BMS XCLUSIVE Movies"
-          posters={recommendedMovies}
+          title="BTAPP XCLUSIVE Movies"
+          posters={nowPlayingMovies}
           isDark={false}
         />
       </div>
