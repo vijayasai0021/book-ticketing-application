@@ -7,6 +7,8 @@ import Slider from "react-slick";
 import { FaCcVisa, FaCcApplePay } from "react-icons/fa";
 import PosterSlider from "../components/PosterSlider/PosterSlider.Component";
 import MovieHero from "../components/MovieHero/MovieHero.Component";
+import Cast from "../components/cast/Cast.Component";
+
 
 const MoviePage = () => {
   const { id } = useParams();
@@ -51,9 +53,72 @@ const MoviePage = () => {
     requestMovie();
   }, [id]);
 
-  const settingsCast = {};
+  const settingsCast = { 
+    infinite: false,
+    speed: 500,
+    dots:true,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initailSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 2,
+          initailSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initailSlide: 4,
+        },
+      },
+    ],
+  };
 
-  const settings = {};
+  const settings = {
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initailSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initailSlide: 3,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initailSlide: 2,
+        },
+      },
+    ],
+  };
 
   return (
     <>
@@ -113,10 +178,30 @@ const MoviePage = () => {
         <div className="my-8">
           <PosterSlider
             config={settings}
-            title="Recommended Movies"
+            title="Similar Movies"
             posters={recommendationMovies}
             isDark={false}
           />
+        </div>
+
+        <div className="my-8">
+          <hr />
+        </div>
+
+        {/* Cast Slider */}
+        <div className="my-8">
+          <h2 className="text-gray-800 font-bold text-2xl mb-4">
+            Cast and Crew
+          </h2>
+          <Slider {...settingsCast}>
+            {cast.map((castData) => (
+              <Cast
+                image={castData.profile_path}
+                castName={movie.original_name}
+                role={movie.character}
+              />
+            ))}
+          </Slider>
         </div>
 
         <div className="my-8">
@@ -127,7 +212,7 @@ const MoviePage = () => {
 
         <PosterSlider
           config={settings}
-          title="BTAPP XCLUSIVE Movies"
+          title="Now Playing"
           posters={nowPlayingMovies}
           isDark={false}
         />
