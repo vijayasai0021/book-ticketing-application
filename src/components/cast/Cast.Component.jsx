@@ -2,8 +2,8 @@ import React from "react";
 
 const Cast = (props) => {
     // console.log(props)
-    console.log(props.castName);
-    console.log(props.role);
+    // console.log(props.castName);
+    // console.log(props.role);
   return (
     <div>
       <div className="flex flex-col items-center">

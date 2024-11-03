@@ -71,8 +71,8 @@ const MoviePage = () => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 5,
-          slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 3,
           initailSlide: 1,
         },
       },
@@ -97,15 +97,15 @@ const MoviePage = () => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 4,
+          slidesToScroll: 4,
         },
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 3,
           initailSlide: 3,
         },
       },
@@ -174,20 +174,6 @@ const MoviePage = () => {
           <hr />
         </div>
 
-        {/* recommendations */}
-        <div className="my-8">
-          <PosterSlider
-            config={settings}
-            title="Similar Movies"
-            posters={recommendationMovies}
-            isDark={false}
-          />
-        </div>
-
-        <div className="my-8">
-          <hr />
-        </div>
-
         {/* Cast Slider */}
         <div className="my-8">
           <h2 className="text-gray-800 font-bold text-2xl mb-4">
@@ -197,11 +183,26 @@ const MoviePage = () => {
             {cast.map((castData) => (
               <Cast
                 image={castData.profile_path}
-                castName={movie.original_name}
-                role={movie.character}
+                castName={castData.original_name}
+                role={castData.character}
               />
             ))}
           </Slider>
+        </div>
+        
+
+        <div className="my-8">
+          <hr />
+        </div>
+
+        {/* recommendations */}
+        <div className="my-8">
+          <PosterSlider
+            config={settings}
+            title="Similar Movies"
+            posters={recommendationMovies}
+            isDark={false}
+          />
         </div>
 
         <div className="my-8">
